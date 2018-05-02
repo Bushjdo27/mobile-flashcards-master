@@ -41,6 +41,20 @@ class EditProfileScreen extends Component {
       })
     }
   }
+
+  renderImageHelper = () => {
+    const { avarta } = this.state;
+    const { avatarUri } = this.props.User
+    if (avarta.length > 0) {
+      return { uri: avarta }
+    } else {
+      if (avatarUri.length > 0) {
+        return { uri: avatarUri }
+      } else {
+        return require('../default_avatar.jpg')
+      }
+    }
+  }
   render() {
     const { name, avatarUri } = this.props.User
     return (
@@ -49,7 +63,7 @@ class EditProfileScreen extends Component {
           justifyContent: 'center',
           alignItems: 'center'
         }}>
-          <Image source={avatarUri.length > 0 ? this.state.avarta.length > 0 ? { uri: this.state.avarta } : { uri: avatarUri } : require('../default_avatar.jpg')} style={styles.imageavartar} />
+          <Image source={this.renderImageHelper()} style={styles.imageavartar} />
           <Text>Edit Avarta</Text>
         </TouchableOpacity>
 
